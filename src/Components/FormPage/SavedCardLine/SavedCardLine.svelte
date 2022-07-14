@@ -2,6 +2,7 @@
 import CardElement from "./CardElement/CardElement.svelte";
     export let cardsArray;
     export let actionFrom;
+    export let t;
 </script>
 
 <section class="cards">
@@ -11,7 +12,7 @@ import CardElement from "./CardElement/CardElement.svelte";
     <div class="card-add active" on:click={() => {actionFrom = "newcard"}}>
         <div class="card-add__wrap">
             <img src="img/pay/1.png" alt="">
-            <p>Новая карта</p>
+            <p>{@html $t("formPage.newCard")}</p>
         </div>
     </div> 
 </section>

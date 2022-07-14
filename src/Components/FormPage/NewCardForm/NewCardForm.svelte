@@ -1,4 +1,5 @@
 <script>
+    export let t;
     const regExp = new RegExp(/^\d+$/);
     let buttonDisabled = false;
     function blurFieldHandler(event){
@@ -46,16 +47,16 @@
                         <img class="card-front__bank-6" src="img/pay/union.jpg" alt="">
                     </div>
                     <div class="card-front__num">
-                        <label class="">Номер карты</label>
+                        <label class="">{@html $t("formPage.number")}</label>
                         <input id="cardNum" pattern="[0-9]*" name="cardnumber" class="card-front__digit inputmode dataValid"
                             required autocomplete="cc-number" type="text"
                             on:blur={blurFieldHandler}
                             on:focus={focusFieldHandle}
                             on:input={inputFieldChecker}>
-                        <label class="">Введите номер карты</label>
+                        <label class="">{@html $t("formPage.numberAction")}</label>
                     </div>
                     <div class="card-front__date">
-                        <label class=""> Действует до</label>
+                        <label class=""> {@html $t("formPage.period")}</label>
                         <div class="card-front__date-wrap">
                             <input name="ccmonth" class="card-front__month inputmode card-front__date-st dataValid"
                                 pattern="[0-9]{'{2}'}" required type="text" placeholder="MM" maxlength="2"
@@ -78,18 +79,18 @@
                         <label>CVV/CVC</label>
                         <input required maxlength="3" name="CVVCVC" class="card-back__digital inputmode dataValid"
                             pattern="[0-9]{'{3}'}" type="password" placeholder="000">
-                        <label>Три цифры с обратной сторны карты</label>
+                        <label>{@html $t("formPage.backCode")}</label>
                     </div>
                 </div>
             </div>
             <div class="card__save">
                 <div class="card__save-check">
-                    <div><input type="checkbox" name="save"></div><div><p>Запомнить карту. Это безопасно<img src="img/pay/icon.png" alt="">. <p>Сохраняя карту, вы
-                        соглашаетесь с <a href="#">условиями привязки карты</a>.<p></p></div>
+                    <div><input type="checkbox" name="save"></div><div><p>{@html $t("formPage.save")}<img src="img/pay/icon.png" alt="">.
+                        <p>{@html $t("formPage.conditions")}<a href="#">{@html $t("formPage.conditionLink")}</a>.<p></p></div>
                 </div>
             </div>
             <div class="card__button">
-                <button id="btn" type="submit" disabled={buttonDisabled}>Пополнить</button>
+                <button id="btn" type="submit" disabled={buttonDisabled}>{@html $t("formPage.submit")}</button>
             </div>
         </div>
     </form>

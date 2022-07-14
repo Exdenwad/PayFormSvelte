@@ -18,6 +18,7 @@
         document.body.append(form);
         form.submit();
     }
+    export let t;
 </script>
 
 <div class="wrapper">
@@ -35,7 +36,7 @@
                         </div>
                         <div class="card__date">
                             <div class="card__date-wrap">
-                                <p class=" card__date-dt ">Действует до</p>
+                                <p class=" card__date-dt ">{@html $t("savedCard.period")}</p>
                                 <p class=" card__date-st ">{cardInfo.validityPeriod.month.slice(-2)} / {cardInfo.validityPeriod.year.slice(-2)}</p>
                             </div>
                         </div>
@@ -46,7 +47,7 @@
                     </div>
                 </div>
                 <div class="card__button">
-                    <button id="btn" type="submit" on:click={createFormAndSend}>Пополнить</button>
+                    <button id="btn" type="submit" on:click={createFormAndSend}>{@html $t("formPage.submit")}</button>
                 </div>
             </div>
     </section>
